@@ -2,20 +2,20 @@
 
 	// DEMO CUSTOM TAXONOMY
 
-	function custom_year_taxonomy() {
+	function custom_taxonomy() {
 
 		$args = array(
-			'label' 		=> 'Year',
-			'rewrite'		=> array('slug' => 'year'),
+			'label' 		=> 'Label',
+			'rewrite'		=> array('slug' => 'slug'),
 			'hierarchical' 	=> true
 		);
 
-		register_taxonomy('year_portfolio', 'portfolio', $args);
-		register_taxonomy('year_places', 'place', $args);
+		register_taxonomy('slug', 'custom_post_type_name', $args);
+		register_taxonomy('another_slug', 'another_custom_post_type_name', $args);
 
 	}
 
-	add_action('init', 'custom_year_taxonomy');
+	//add_action('init', 'custom_taxonomy');
 
 	// ADD TAXONOMY TO USERS AND PAGES
 

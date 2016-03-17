@@ -16,6 +16,7 @@
 		
 	<div id="primary">
 		<div id="content" class="clearfix">
+
 			<?php while ( have_posts() ) : the_post(); ?>
 			
 				<?php get_template_part( 'content', 'my-page' ); ?>
@@ -25,7 +26,7 @@
 		</div><!-- #content -->
 	</div><!-- #primary -->
 	
-	<?php spacious_sidebar_select(); ?>
+	<?php get_sidebar('my-page'); ?>
 	
 	<?php do_action( 'spacious_after_body_content' ); ?>
 

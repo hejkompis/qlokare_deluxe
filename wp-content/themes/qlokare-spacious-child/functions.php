@@ -117,7 +117,7 @@ add_filter( 'wp_nav_menu_items', 'add_student_link', 10, 2 );
 function add_student_link( $items, $args ) {
     $user = wp_get_current_user();
     if (is_user_logged_in() && $args->theme_location == 'primary' && $user->roles[0] == 'student') {
-        $items .= '<li><a href="/min-sida/">Min sida</a></li>';
+        $items .= '<li><a href="/my-page/">My page</a></li>';
     }
     return $items;
 }
@@ -125,10 +125,10 @@ function add_student_link( $items, $args ) {
 add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
 function add_loginout_link( $items, $args ) {
     if (is_user_logged_in() && $args->theme_location == 'primary') {
-        $items .= '<li><a href="'. wp_logout_url() .'">Logga ut</a></li>';
+        $items .= '<li><a href="'. wp_logout_url() .'">Log out</a></li>';
     }
     elseif (!is_user_logged_in() && $args->theme_location == 'primary') {
-        $items .= '<li><a href="'. site_url('wp-login.php') .'">Logga in</a></li>';
+        $items .= '<li><a href="'. site_url('wp-login.php') .'">Log in</a></li>';
     }
     return $items;
 }

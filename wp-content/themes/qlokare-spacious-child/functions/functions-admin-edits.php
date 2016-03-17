@@ -1,5 +1,13 @@
 <?php
 
+function wpse23007_redirect(){
+  if( is_admin() && !defined('DOING_AJAX') && ( current_user_can('student') ) ){
+    wp_redirect(home_url());
+    exit;
+  }
+}
+add_action('init','wpse23007_redirect');
+
 function student_login_redirect( $redirect_to, $request, $user  ) {
     return ( is_array( $user->roles ) && in_array( 'student', $user->roles ) ) ? site_url() : admin_url();
 }
@@ -28,6 +36,17 @@ function my_save_extra_profile_fields( $user_id ) {
         return false;
     /* Copy and paste this line for additional fields. Make sure to change 'personnummer' to the field ID. */
     update_usermeta( $user_id, 'socsecnr', $_POST['socsecnr'] );
+    
+    $new_study_plan_approval_status = isset($_POST['study_plan_approved']) ? date('Y-m-d H:i:s') : false;
+    if(isset($_POST['study_plan_id'])) {
+    
+      $old_study_plan_approval_status = get_post_meta($_POST['study_plan_id'], 'study_plan_approved', true);  
+      if($old_study_plan_approval_status && $new_study_plan_approval_status) {
+        $new_study_plan_approval_status = $old_study_plan_approval_status;
+      } 
+
+    }
+    update_post_meta( $_POST['study_plan_id'], 'study_plan_approved', $new_study_plan_approval_status );
 }
 
 // remove ability to post, just use pages
